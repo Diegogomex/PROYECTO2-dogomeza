@@ -15,5 +15,13 @@ class Producto(db.Model):
         'polymorphic_on': type  
     }
 
+    def calcular_rentabilidad(self) -> int:
+        """
+        Calcula la rentabilidad del producto restando el costo de los ingredientes al precio de venta.
+        Retorna:
+        - int: La rentabilidad del producto.
+        """
+        return self.precio_publico - self.calcular_costo()
+
     def __repr__(self):
         return f'<Producto {self.nombre}>'

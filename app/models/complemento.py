@@ -1,6 +1,10 @@
 from app.models.ingrediente import Ingrediente
 
 class Complemento(Ingrediente):
+    __mapper_args__ = {
+        'polymorphic_identity': 'complemento'
+    }
+
     def __init__(self, nombre:str, precio:int, calorias:int, inventario:float, es_vegetariano:bool)->None:
         super().__init__(nombre=nombre, precio=precio, calorias=calorias, inventario=inventario, es_vegetariano=es_vegetariano)
     

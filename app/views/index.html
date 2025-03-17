@@ -17,6 +17,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ producto.nombre }}</h5>
                         <p class="card-text">Precio: ${{ producto.precio_publico }}</p>
+                        <a href="/vender/{{ producto.nombre.lower().replace(' ', '-') }}" class="btn btn-primary">Vender</a>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,10 @@
 from app.models.ingrediente import Ingrediente
 
 class Base (Ingrediente):
+    __mapper_args__ = {
+        'polymorphic_identity': 'base'
+    }
+
     def __init__(self, nombre:str, precio:int, calorias:int, inventario:float, es_vegetariano:bool, sabor:str)->None:
         super().__init__(nombre=nombre, precio=precio, calorias=calorias, inventario=inventario, es_vegetariano=es_vegetariano)
         self.__sabor= sabor
@@ -11,6 +15,13 @@ class Base (Ingrediente):
             self.inventario += 5
         else:
             raise ValueError ("La cantidad debe ser un número .")
+    
+    def es_sano(self) -> bool:
+        """
+        Determina si el ingrediente es sano.
+        Un ingrediente es sano si tiene menos de 100 calorías o es vegetariano.
+        """
+        return self.calorias < 100 or self.es_vegetariano
     
     @property
     def sabor(self) -> str:

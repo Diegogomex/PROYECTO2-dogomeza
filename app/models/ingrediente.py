@@ -9,9 +9,15 @@ class Ingrediente(db.Model):
     calorias = db.Column(db.Integer, nullable=False)
     inventario = db.Column(db.Float, nullable=False)
     es_vegetariano = db.Column(db.Boolean, nullable=False)
+    type = db.Column(db.String(50))
 
     # Relación con la tabla de productos
     productos = db.relationship('Producto', secondary=producto_ingrediente, back_populates='ingredientes')
+
+    __mapper_args__ = {
+        'polymorphic_on': type,
+        'polymorphic_identity': 'ingrediente'
+    }
 
     def __repr__(self):
         return f'<Ingrediente {self.nombre}>'
